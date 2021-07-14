@@ -183,6 +183,9 @@ files:
 
     }
   learner_created: false
+- name: src/analyzer/res/idk.pdf
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/64/stages/345/implement#comment
 status: Unchecked
 record: -1
