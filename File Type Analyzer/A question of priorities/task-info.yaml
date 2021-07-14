@@ -173,12 +173,15 @@ files:
 - name: src/analyzer/Worker.java
   visible: true
   learner_created: true
-- name: src/analyzer/res/idk.pdf
-  visible: true
-  learner_created: true
 - name: src/analyzer/KMP.java
   visible: true
   learner_created: true
+- name: src/analyzer/PatternProcessor.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/64/stages/346/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 14 Jul 2021 06:56:19 UTC
+record: 4

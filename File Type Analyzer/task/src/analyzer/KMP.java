@@ -24,7 +24,6 @@ public class KMP {
                 return true;
             }
         }
-        System.out.println(filename + ": Unknown file type");
         return false;
     }
 
