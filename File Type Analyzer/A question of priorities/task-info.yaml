@@ -167,6 +167,18 @@ files:
     \    Files.deleteIfExists(Paths.get(CURRENT_DIR + testFolder));\n        }\n \
     \       catch (IOException ex) {\n\n\n        }\n    }\n\n}\n"
   learner_created: false
+- name: src/analyzer/FileProcessor.java
+  visible: true
+  learner_created: true
+- name: src/analyzer/Worker.java
+  visible: true
+  learner_created: true
+- name: src/analyzer/res/idk.pdf
+  visible: true
+  learner_created: true
+- name: src/analyzer/KMP.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/64/stages/346/implement#comment
 status: Unchecked
 record: -1

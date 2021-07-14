@@ -186,6 +186,18 @@ files:
 - name: src/analyzer/res/idk.pdf
   visible: true
   learner_created: true
+- name: src/analyzer/Worker.java
+  visible: true
+  learner_created: true
+- name: src/analyzer/KMP.java
+  visible: true
+  learner_created: true
+- name: src/analyzer/FileProcessor.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/64/stages/345/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 14 Jul 2021 05:45:45 UTC
 record: -1
