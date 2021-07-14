@@ -1,8 +1,6 @@
 package analyzer;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,11 +10,10 @@ public class Main {
     public static List<String[]> listOfPatterns;
     public static void main(String[] args) throws InterruptedException {
 
-        //folderName = args[0];
-        //patternFile = args[1];
+        folderName = args[0];
+        patternFile = args[1];
         //for testing only
-        folderName = "File Type Analyzer/task/src/analyzer/res";
-        patternFile = "File Type Analyzer/task/src/analyzer/res/patterns.db";
+        //folderName = "File Type Analyzer/task/src/analyzer/res";patternFile = "File Type Analyzer/task/src/analyzer/res/patterns.db";
 
         List<File> list = FileProcessor.processFolder(new File(folderName));
         listOfPatterns = PatternProcessor.processPatternFile(patternFile);

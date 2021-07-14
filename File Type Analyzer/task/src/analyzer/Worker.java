@@ -22,13 +22,11 @@ public class Worker extends Thread{
     private void processPatterns(){
         List<String[]> list = Main.listOfPatterns;
         boolean isNotFound = true;
-        for(int i = 0; i < list.size(); i++){
-            String[] strArr = list.get(i);
-            if(RabinKarp(strArr[1], strArr[2], processFile(filepath), filename)){
-                isNotFound = false;
-                break;
-            }
+
+        if(RabinKarp(list, processFile(filepath), filename)){
+            isNotFound = false;
         }
+
 
         if(isNotFound){
             System.out.println(filename + ": Unknown file type");

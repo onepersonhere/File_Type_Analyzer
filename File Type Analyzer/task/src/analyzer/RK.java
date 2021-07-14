@@ -14,83 +14,40 @@ public class RK {
         return (long)(ch - 'A' + 1);
     }
 
-    public static boolean RabinKarp(String pattern, String type, String text, String filename) {
-        /*
-        Recall that for the Rabin-Karp algorithm we need to choose constants a a a and m m m.
-        In this implementation, the constants are equal 53 53 53 and 109+9 10^9 + 9 109+9 respectively.
-        */
-        int a = 53;
-        long m = 1_000_000_000 + 9;
-
-        /*
-        First, we need to calculate a hash value for the pattern and for the first substring
-        of the text using the formula of the polynomial hash directly.
-        We perform it simultaneously in the for loop.
-        Also, we store the current power of a a a in a variable pow.
-        After the last multiplication, it is equal to a∣p∣−1 a^{|p| - 1} a∣p∣−1 and
-        the value will be used in further computations.
-        */
-        long patternHash = 0;
-        long currSubstrHash = 0;
-        long pow = 1;
-
-        for (int i = 0; i < pattern.length(); i++) {
-            patternHash += charToLong(pattern.charAt(i)) * pow;
-            patternHash %= m;
-
-            currSubstrHash += charToLong(text.charAt(text.length() - pattern.length() + i)) * pow;
-            currSubstrHash %= m;
-
-            if (i != pattern.length() - 1) {
-                pow = pow * a % m;
-            }
+    public static boolean RabinKarp(List<String[]> list, String text, String filename) {
+        long[] patternHash = new long[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            patternHash[i] = getHash(list.get(i)[1]);
         }
-
-        /*
-        Here we create a list to store occurrences of the pattern.
-        Then, we move along the text from the right to the left calculating and
-        comparing the hash values of the pattern and the current substring.
-        If they are equal, we perform a symbol-by-symbol comparison.
-        If the strings are indeed equal, we add the index of the current substring
-        to the list of all occurrences. At the end of the for loop,
-        we update the hash value for the current substring.
-        After the loop is finished, we return the list of all occurrences as a final result.
-        */
-        ArrayList<Integer> occurrences = new ArrayList<>();
-
-        for (int i = text.length(); i >= pattern.length(); i--) {
-            if (patternHash == currSubstrHash) {
-                boolean patternIsFound = true;
-
-                for (int j = 0; j < pattern.length(); j++) {
-                    if (text.charAt(i - pattern.length() + j) != pattern.charAt(j)) {
-                        patternIsFound = false;
-                        break;
+        for(int j = 0; j < list.size(); j++){
+            String pattern = list.get(j)[1];
+            for(int i = 0; i < text.length() - pattern.length() + 1; i++){
+                String subStr = text.substring(i, i + pattern.length());
+                long subHash = getHash(subStr);
+                if(subHash == patternHash[j]){
+                    //if hash is same, compare chars
+                    if(pattern.equals(subStr)){
+                        String type = list.get(j)[2];
+                        System.out.println(filename + ": " + type);
+                        return true;
                     }
                 }
-
-                if (patternIsFound) {
-                    occurrences.add(i - pattern.length());
-                }
-            }
-
-            if (i > pattern.length()) {
-                /*
-                Note that when calculating a hash value for the next substring
-                we add m m m to the difference.
-                Since a hash value for the pattern is a non-negative number,
-                hash values for all substrings should be non-negative as well.
-                This addition is done to avoid the processing of negative values.
-                */
-                currSubstrHash = (currSubstrHash - charToLong(text.charAt(i - 1)) * pow % m + m) * a % m;
-                currSubstrHash = (currSubstrHash + charToLong(text.charAt(i - pattern.length() - 1))) % m;
             }
         }
-        if(occurrences.isEmpty()){
-            return false;
-        }else{
-            System.out.println(filename + ": " + type);
-            return true;
+
+        return false;
+    }
+
+    private static long getHash(String string){
+        int a = 53; //prime number
+        long m = 1_000_000_000 + 9; //mod
+        long patternHash = 0;
+
+        //create a hash for each char in the string
+        for (int i = 0; i < string.length(); i++) {
+            patternHash += charToLong(string.charAt(i)) * Math.pow(a, i);
         }
+        patternHash %= m; //then mod it
+        return patternHash;
     }
 }
