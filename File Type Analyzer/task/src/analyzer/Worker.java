@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import static analyzer.FileProcessor.processFile;
-import static analyzer.KMP.kmpTypeComparator;
+import static analyzer.RK.RabinKarp;
 
 public class Worker extends Thread{
     private String filepath;
@@ -24,7 +24,7 @@ public class Worker extends Thread{
         boolean isNotFound = true;
         for(int i = 0; i < list.size(); i++){
             String[] strArr = list.get(i);
-            if(kmpTypeComparator(strArr[1], strArr[2], processFile(filepath), filename)){
+            if(RabinKarp(strArr[1], strArr[2], processFile(filepath), filename)){
                 isNotFound = false;
                 break;
             }
